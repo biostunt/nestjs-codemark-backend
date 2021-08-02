@@ -1,0 +1,58 @@
+{
+  "name": "codemark-backend",
+  "private": true,
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "start:test": "jest --watchAll"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.5",
+    "@nestjs/core": "^8.0.5",
+    "@nestjs/platform-express": "^8.0.5",
+    "@nestjs/typeorm": "^8.0.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "mysql2": "^2.2.5",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.3.0",
+    "typeorm": "^0.2.36"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^8.0.5",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.10",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}

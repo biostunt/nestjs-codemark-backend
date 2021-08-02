@@ -15,7 +15,7 @@ export class UsersService {
         return await this.userRepository.find();
     }
 
-    async find(login) {
+    async find(login: string) {
         return await this.userRepository
             .createQueryBuilder("user")
             .leftJoinAndSelect("user.roles", "role")

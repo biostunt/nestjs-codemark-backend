@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { getConnectionOptions } from "typeorm";
-import { UsersModule } from "./user";
+import { UsersModule } from "./users";
 import { RoleModule } from "./role";
 import { Role, User } from "./entity";
 

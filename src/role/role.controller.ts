@@ -7,7 +7,6 @@ import {
     ParseIntPipe,
     Post,
     Put,
-    Query,
     UseFilters,
 } from "@nestjs/common";
 import { BadRequestExceptionFilter } from "../common/filters/exceptions.filter";

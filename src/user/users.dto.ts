@@ -1,15 +1,4 @@
-import {
-    IsArray,
-    IsNotEmpty,
-    IsNumber,
-    IsOptional,
-    Matches,
-} from "class-validator";
-
-export class DeleteUserDto {
-    @IsNotEmpty()
-    login: string;
-}
+import { IsArray, IsNotEmpty, IsOptional, Matches } from "class-validator";
 
 export class CreateUserDto {
     @IsNotEmpty()

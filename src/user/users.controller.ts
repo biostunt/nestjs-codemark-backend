@@ -4,14 +4,12 @@ import {
     Delete,
     Get,
     Param,
-    ParseIntPipe,
     Post,
     Put,
-    Query,
     UseFilters,
 } from "@nestjs/common";
 import { BadRequestExceptionFilter } from "../common/filters/exceptions.filter";
-import { CreateUserDto, DeleteUserDto, UpdateUserDto } from "./users.dto";
+import { CreateUserDto, UpdateUserDto } from "./users.dto";
 import { UsersService } from "./users.service";
 
 @Controller("users")

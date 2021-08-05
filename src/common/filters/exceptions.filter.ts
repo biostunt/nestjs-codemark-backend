@@ -15,10 +15,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter {
         const body = JSON.parse(JSON.stringify(exception.getResponse()));
         response.status(status).json({
             success: false,
-            errors:
-                Array.isArray(body.message)
-                    ? body.message
-                    : [body.message],
+            errors: Array.isArray(body.message) ? body.message : [body.message],
         });
     }
 }

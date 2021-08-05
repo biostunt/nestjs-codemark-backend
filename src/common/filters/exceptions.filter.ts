@@ -16,7 +16,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter {
         response.status(status).json({
             success: false,
             errors:
-                typeof body.message === "object"
+                Array.isArray(body.message)
                     ? body.message
                     : [body.message],
         });

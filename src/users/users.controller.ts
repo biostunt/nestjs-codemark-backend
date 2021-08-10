@@ -7,12 +7,15 @@ import {
     Post,
     Put,
     UseFilters,
+    UseInterceptors,
 } from "@nestjs/common";
+import { ResponseInterceptor } from "src/common/interceptors";
 import { BadRequestExceptionFilter } from "../common/filters/exceptions.filter";
 import { CreateUserDto, UpdateUserDto } from "./users.dto";
 import { UsersService } from "./users.service";
 
 @Controller("users")
+@UseInterceptors(ResponseInterceptor)
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
@@ -29,7 +32,7 @@ export class UsersController {
     @Post()
     @UseFilters(BadRequestExceptionFilter)
     async create(@Body() createUserDto: CreateUserDto) {
-        return await this.usersService.create(createUserDto);
+        await this.usersService.create(createUserDto);
     }
 
     @Put(":login")
@@ -38,11 +41,11 @@ export class UsersController {
         @Param("login") login: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
-        return await this.usersService.update(login, updateUserDto);
+        await this.usersService.update(login, updateUserDto);
     }
 
     @Delete(":login")
     async delete(@Param("login") login: string) {
-        return await this.usersService.delete(login);
+        await this.usersService.delete(login);
     }
 }

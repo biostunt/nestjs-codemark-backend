@@ -8,12 +8,15 @@ import {
     Post,
     Put,
     UseFilters,
+    UseInterceptors,
 } from "@nestjs/common";
+import { ResponseInterceptor } from "src/common/interceptors";
 import { BadRequestExceptionFilter } from "../common/filters/exceptions.filter";
 import { CreateRoleDto, UpdateRoleDto } from "./role.dto";
 import { RoleService } from "./role.service";
 
 @Controller("role")
+@UseInterceptors(ResponseInterceptor)
 export class RoleController {
     constructor(private readonly roleService: RoleService) {}
 
@@ -30,17 +33,17 @@ export class RoleController {
     @Post()
     @UseFilters(BadRequestExceptionFilter)
     async create(@Body() createRoleDto: CreateRoleDto) {
-        return await this.roleService.create(createRoleDto);
+        await this.roleService.create(createRoleDto);
     }
 
     @Put()
     @UseFilters(BadRequestExceptionFilter)
     async update(@Body() updateRoleDto: UpdateRoleDto) {
-        return await this.roleService.update(updateRoleDto);
+        await this.roleService.update(updateRoleDto);
     }
 
     @Delete(":id")
     async delete(@Param("id", ParseIntPipe) id: number) {
-        return await this.roleService.delete(id);
+        await this.roleService.delete(id);
     }
 }

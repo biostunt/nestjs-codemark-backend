@@ -11,11 +11,11 @@ export class UsersService {
         @InjectRepository(Role) private roleRepository: Repository<Role>,
     ) {}
 
-    async findAll() {
+    async findAll(): Promise<User[]> {
         return await this.userRepository.find();
     }
 
-    async find(login: string) {
+    async find(login: string): Promise<User> {
         return await this.userRepository
             .createQueryBuilder("user")
             .leftJoinAndSelect("user.roles", "role")
@@ -23,7 +23,7 @@ export class UsersService {
             .getOne();
     }
 
-    async create(createUserDto: CreateUserDto) {
+    async create(createUserDto: CreateUserDto): Promise<void> {
         const { name, login, password, roles } = createUserDto;
         const existingRoles = roles
             ? await this.roleRepository.findByIds(roles)
@@ -38,10 +38,9 @@ export class UsersService {
         user.password = password;
         user.roles = existingRoles;
         await this.userRepository.save(user);
-        return { success: true };
     }
 
-    async update(login: string, updateUserDto: UpdateUserDto) {
+    async update(login: string, updateUserDto: UpdateUserDto): Promise<void> {
         const { name, password, roles } = updateUserDto;
         const existingRoles = roles
             ? await this.roleRepository.findByIds(roles)
@@ -55,16 +54,14 @@ export class UsersService {
         user.password = password;
         user.roles = existingRoles;
         this.userRepository.save(user);
-        return { success: true };
     }
 
-    async delete(login: string) {
+    async delete(login: string): Promise<void> {
         const user = await this.userRepository.findOne({ login });
         if (!user)
             throw new BadRequestException(
                 `User with login: ${login} doesn't exist!`,
             );
         await this.userRepository.remove([user]);
-        return { success: true };
     }
 }
